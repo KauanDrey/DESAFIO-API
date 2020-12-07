@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 
 @Entity
@@ -44,7 +46,7 @@ public class Cliente {
 	private String documento;
 	
 	
-	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataCadastro;
 
 	public Long getId() {

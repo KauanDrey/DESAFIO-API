@@ -50,7 +50,8 @@ public class Produto {
 	@ManyToOne
 	@JoinColumn(name = "id_fornecedor")
 	private Fornecedor fornecedor;
-
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -131,6 +132,8 @@ public class Produto {
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 	}
+	
+
 
 	@Override
 	public int hashCode() {

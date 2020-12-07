@@ -11,7 +11,6 @@ CREATE TABLE produto(
     id_fornecedor BIGINT(20) NOT NULL,
  	FOREIGN KEY (id_fornecedor) REFERENCES fornecedor(id)
  	
- 	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

@@ -19,58 +19,58 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gft.api.controller.respository.filter.ProdutoFilter;
+import com.gft.api.controller.respository.filter.VendaFilter;
 import com.gft.api.event.RecursoCriadoEvent;
-import com.gft.api.model.Produto;
-import com.gft.api.repository.ProdutoRepository;
-import com.gft.api.service.ProdutoService;
-
+import com.gft.api.model.Venda;
+import com.gft.api.repository.VendaRepository;
+import com.gft.api.service.VendaService;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
-
+@RequestMapping("/vendas")
+public class VendaController {
+	
 	@Autowired
-	private ProdutoRepository produtoRepository;
+	private VendaRepository vendaRepository;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
 	@Autowired
-	private ProdutoService produtoService;
+	private VendaService vendaService;
+
 
 	@GetMapping
-	public List<Produto> pesquisar(ProdutoFilter produtoFilter) {
-	return produtoRepository.filtrar(produtoFilter);
+	public List<Venda> pesquisar(VendaFilter vendaFilter) {
+		return vendaRepository.filtrar(vendaFilter);
 
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Produto> criar(@Valid @RequestBody Produto produto, HttpServletResponse response) {
-		Produto produtoSalva = produtoRepository.save(produto);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, produtoSalva.getId()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(produtoSalva);
+	public ResponseEntity<Venda> criar(@Valid @RequestBody Venda venda, HttpServletResponse response) {
+		
+		Venda vendaSalva = vendaRepository.save(venda);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, vendaSalva.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(vendaSalva);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Produto> buscarPeloId(@PathVariable Long id) {
-		Produto produto = produtoRepository.findById(id).orElse(null);
-		return produto != null ? ResponseEntity.ok(produto) : ResponseEntity.notFound().build();
+	public ResponseEntity<Venda> buscarPeloId(@PathVariable Long id) {
+		Venda venda = vendaRepository.findById(id).orElse(null);
+		return venda != null ? ResponseEntity.ok(venda) : ResponseEntity.notFound().build();
 	}
-
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long id) {
-		this.produtoRepository.deleteById(id);
+		this.vendaRepository.deleteById(id);
 	 
 	}
 	
-	
 	@PutMapping("/{id}")
-	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @Valid @RequestBody Produto produto) {
-		Produto produtoSalva = produtoService.atualizar(id, produto);
-		return ResponseEntity.ok(produtoSalva);
+	public ResponseEntity<Venda> atualizar(@PathVariable Long id, @Valid @RequestBody Venda venda) {
+		Venda vendaSalva = vendaService.atualizar(id, venda);
+		return ResponseEntity.ok(vendaSalva);
 	}
+
 }
