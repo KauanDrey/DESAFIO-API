@@ -1,10 +1,8 @@
 package com.gft.api.model;
 
 
-
-
-
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,38 +14,42 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 
 @Entity
 @Table(name = "cliente")
 public class Cliente {
 
+	@ApiModelProperty(value = "ID do cliente", example = "1")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ApiModelProperty(example ="Kauan Drey")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String nome;
 	
-	
+	@ApiModelProperty(example = "kauan.drey@gft.com")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String email;
 	
-	
+	@ApiModelProperty(example = "gft@1234")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String senha;
 	
-	
+	@ApiModelProperty(example ="852.964.274-19")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String documento;
 	
-	
+	@ApiModelProperty(example ="01/01/2021")
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataCadastro;
+	private Date dataCadastro;
 
 	public Long getId() {
 		return id;
@@ -90,12 +92,12 @@ public class Cliente {
 	}
 
 
-	public LocalDate getDataCadastro() {
+	public Date getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
+	public void setDataCadastro(Date date) {
+		this.dataCadastro = date;
 	}
 
 	@Override
@@ -121,6 +123,10 @@ public class Cliente {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public void setDataCadastro1(Date date) {
+	
 	}
 	
 	

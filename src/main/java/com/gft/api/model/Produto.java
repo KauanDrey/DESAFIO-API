@@ -12,41 +12,53 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "produto")
 public class Produto {
 
+	
+	
+	@ApiModelProperty(value = "ID d produto", example = "1")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@ApiModelProperty( example ="IPhone 12 pro max")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String nome;
 
+	@ApiModelProperty(example ="55985544")
 	private String codigoProduto;
 
+	@ApiModelProperty(example ="7999.99")
 	@NotNull
 	private BigDecimal valor;
 
+	@ApiModelProperty(example ="True")
 	@NotNull
 	private boolean promocao;
 
-	@NotNull
+	@ApiModelProperty(example ="5999.99")
 	private BigDecimal valorPromo;
 
+	@ApiModelProperty(example ="Celular")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String categoria;
 
+	@ApiModelProperty(example ="iphone12promax.jpeg")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String imagem;
 
+	@ApiModelProperty(example ="1")
 	@NotNull
 	private Long quantidade;
 
-	
+	@ApiModelProperty(value = "ID de um fornecedor", example = "1")
 	@ManyToOne
 	@JoinColumn(name = "id_fornecedor")
 	private Fornecedor fornecedor;

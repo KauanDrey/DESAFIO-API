@@ -2,9 +2,9 @@ CREATE TABLE produto(
  	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
  	nome VARCHAR(100) NOT NULL,
     codigo_produto VARCHAR (100),
-    valor DECIMAL (65) NOT NULL,
+    valor DECIMAL (10,2) NOT NULL,
     promocao boolean NOT NULL,
-    valor_promo DECIMAL (65) NOT NULL,
+    valor_promo DECIMAL (10,2),
     categoria VARCHAR (100) NOT NULL,
     imagem VARCHAR (100) NOT NULL,
     quantidade BIGINT (100) NOT NULL,
@@ -14,4 +14,4 @@ CREATE TABLE produto(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-INSERT INTO produto(nome, codigo_produto, valor, promocao, valor_promo, categoria, imagem, quantidade, id_fornecedor) values ('Kauan Drey', '33333', '3600.12', '1', '5600.00', 'TLOU II', 'jpe', '2', '1');
+INSERT INTO produto(nome, codigo_produto, valor, promocao, valor_promo, categoria, imagem, quantidade, id_fornecedor) values ('Kauan Drey', '33333', '3600.12', '1', '5600.89', 'TLOU II', 'jpe', '2', '1');

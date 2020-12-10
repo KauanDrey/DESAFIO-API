@@ -8,18 +8,23 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "fornecedor")
 public class Fornecedor {
 
+	@ApiModelProperty(value = "ID do fornecedor", example = "1")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@ApiModelProperty(example ="Apple")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String nome;
 
+	@ApiModelProperty(example ="12345.0001.6789")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String cnpj;

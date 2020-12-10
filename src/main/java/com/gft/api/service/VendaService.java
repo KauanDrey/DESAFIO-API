@@ -21,7 +21,10 @@ public class VendaService {
 			throw new EmptyResultDataAccessException(1);
 
 		}
+		
 		BeanUtils.copyProperties(venda, vendaSalva, "id");
+		
+		
 		return vendaRepository.save(vendaSalva);
 
 	}

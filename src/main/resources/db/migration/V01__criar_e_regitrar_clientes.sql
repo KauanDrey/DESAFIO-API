@@ -4,7 +4,7 @@ CREATE TABLE cliente(
  	email VARCHAR (100) NOT NULL,
  	senha VARCHAR (100) NOT NULL,
  	documento VARCHAR (60) NOT NULL,
- 	data_cadastro DATE NOT NULL
+ 	data_cadastro DATE
  	
  	
  	
