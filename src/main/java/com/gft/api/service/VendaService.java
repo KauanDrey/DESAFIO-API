@@ -10,7 +10,7 @@ import com.gft.api.repository.VendaRepository;
 
 @Service
 public class VendaService {
-	
+
 	@Autowired
 	private VendaRepository vendaRepository;
 
@@ -21,10 +21,9 @@ public class VendaService {
 			throw new EmptyResultDataAccessException(1);
 
 		}
-		
+
 		BeanUtils.copyProperties(venda, vendaSalva, "id");
-		
-		
+
 		return vendaRepository.save(vendaSalva);
 
 	}

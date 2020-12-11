@@ -26,31 +26,25 @@ public class ClienteRepositoryImpl implements ClienteRepositoryQuery {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Cliente> criteria = builder.createQuery(Cliente.class);
 		Root<Cliente> root = criteria.from(Cliente.class);
-		
+
 		Predicate[] predicates = criarRestricoes(clienteFilter, builder, root);
 		criteria.where(predicates);
-		
-		TypedQuery<Cliente> query = manager.createQuery (criteria);
-		
-		 
+
+		TypedQuery<Cliente> query = manager.createQuery(criteria);
+
 		return query.getResultList();
 	}
-	
 
-	private Predicate[] criarRestricoes(ClienteFilter clienteFilter, CriteriaBuilder builder, 
-			Root<Cliente> root) {
+	private Predicate[] criarRestricoes(ClienteFilter clienteFilter, CriteriaBuilder builder, Root<Cliente> root) {
 		List<Predicate> predicates = new ArrayList<>();
-		
+
 		if (!StringUtils.isEmpty(clienteFilter.getNome())) {
-			predicates.add(builder.like(
-					builder.lower(root.get("nome")), "%" + clienteFilter.getNome().toLowerCase() + "%"));
-			
-			
+			predicates.add(
+					builder.like(builder.lower(root.get("nome")), "%" + clienteFilter.getNome().toLowerCase() + "%"));
+
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);
-		
-		
+
 	}
-	
-	
+
 }

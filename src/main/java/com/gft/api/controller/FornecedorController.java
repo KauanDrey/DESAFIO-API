@@ -101,21 +101,20 @@ public class FornecedorController {
 		return fornecedorRepository.findAll();
 
 	}
-	
+
 	@ApiImplicitParam(name = "Authorization", value = "Bearer Token", required = true, allowEmptyValue = false, paramType = "header", example = "Bearer access_token")
 	@GetMapping("/asc")
 	@ApiOperation("Lista todos os fornecedores cadastrados em geral na ordem crescente alfabética")
 	public List<Fornecedor> listarOrdemAsc() {
 		return fornecedorRepository.findAllByOrderByNomeAsc();
 	}
-	
+
 	@ApiImplicitParam(name = "Authorization", value = "Bearer Token", required = true, allowEmptyValue = false, paramType = "header", example = "Bearer access_token")
 	@GetMapping("/desc")
 	@ApiOperation("Lista todos os fornecedores cadastrados em geral na ordem decrescente alfabética")
 	public List<Fornecedor> listarOrdemDesc() {
 		return fornecedorRepository.findAllByOrderByNomeDesc();
-	
-	
+
 	}
 
 }

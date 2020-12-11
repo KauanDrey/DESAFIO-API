@@ -100,29 +100,19 @@ public class ClienteController {
 		return clienteRepository.findAll();
 
 	}
-	
+
 	@ApiImplicitParam(name = "Authorization", value = "Bearer Token", required = true, allowEmptyValue = false, paramType = "header", example = "Bearer access_token")
 	@GetMapping("/asc")
 	@ApiOperation("Lista todos os clientes cadastrados em geral na ordem crescente alfabética")
 	public List<Cliente> listarOrdemAsc() {
 		return clienteRepository.findAllByOrderByNomeAsc();
 	}
-	
+
 	@ApiImplicitParam(name = "Authorization", value = "Bearer Token", required = true, allowEmptyValue = false, paramType = "header", example = "Bearer access_token")
 	@GetMapping("/desc")
 	@ApiOperation("Lista todos os clientes cadastrados em geral na ordem decrescente alfabética")
 	public List<Cliente> listarOrdemDesc() {
 		return clienteRepository.findAllByOrderByNomeDesc();
-	
-	
+
 	}
 }
-
-
-
-
-
-
-
-
-

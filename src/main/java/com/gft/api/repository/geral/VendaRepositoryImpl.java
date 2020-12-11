@@ -38,13 +38,12 @@ public class VendaRepositoryImpl implements VendaRepositoryQuery {
 		return query.getResultList();
 	}
 
-	private Predicate[] criarRestricoes(VendaFilter vendaFilter, CriteriaBuilder builder,
-			Root<Venda> root) {
+	private Predicate[] criarRestricoes(VendaFilter vendaFilter, CriteriaBuilder builder, Root<Venda> root) {
 		List<Predicate> predicates = new ArrayList<>();
 
 		if (!StringUtils.isEmpty(vendaFilter.getNome())) {
-			predicates.add(builder.like(builder.lower(root.get("nome")),
-					"%" + vendaFilter.getNome().toLowerCase() + "%"));
+			predicates.add(
+					builder.like(builder.lower(root.get("nome")), "%" + vendaFilter.getNome().toLowerCase() + "%"));
 
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);

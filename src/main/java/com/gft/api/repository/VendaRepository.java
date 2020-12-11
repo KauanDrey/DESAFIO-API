@@ -8,9 +8,10 @@ import com.gft.api.model.Cliente;
 import com.gft.api.model.Venda;
 import com.gft.api.repository.geral.VendaRepositoryQuery;
 
-public interface VendaRepository extends JpaRepository<Venda, Long>, VendaRepositoryQuery{
+public interface VendaRepository extends JpaRepository<Venda, Long>, VendaRepositoryQuery {
 
 	List<Venda> findAllByOrderByNomeAsc();
+
 	List<Venda> findAllByOrderByNomeDesc();
-	
+
 }

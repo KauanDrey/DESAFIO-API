@@ -11,8 +11,5 @@ public class ProdutoFilter {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
-	
-}
 
+}

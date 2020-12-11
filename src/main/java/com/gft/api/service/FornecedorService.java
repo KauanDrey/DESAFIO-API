@@ -10,7 +10,7 @@ import com.gft.api.repository.FornecedorRepository;
 
 @Service
 public class FornecedorService {
-	
+
 	@Autowired
 	private FornecedorRepository fornecedorRepository;
 

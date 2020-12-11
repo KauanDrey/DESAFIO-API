@@ -7,8 +7,6 @@ import com.gft.api.model.Venda;
 
 public interface VendaRepositoryQuery {
 
-	
 	public List<Venda> filtrar(VendaFilter vendaFilter);
-	
-	
+
 }

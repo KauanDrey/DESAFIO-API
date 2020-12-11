@@ -37,82 +37,72 @@ public class DesafioApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 		String mensagemUsuario = messageSource.getMessage("mensagem.invalida", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.getCause().toString();
-		
-		
+
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
 	}
 
-	
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		List<Erro> erros = criarListaDeErros(ex.getBindingResult());
 		return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
 	}
-	
-	
-	
-	@ExceptionHandler({EmptyResultDataAccessException.class})
-	public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
-		String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
+
+	@ExceptionHandler({ EmptyResultDataAccessException.class })
+	public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex,
+			WebRequest request) {
+		String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null,
+				LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
-	return handleExceptionInternal(ex, erros , new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
-	
 
+	@ExceptionHandler({ DataIntegrityViolationException.class })
+	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex,
+			WebRequest request) {
+		String mensagemUsuario = messageSource.getMessage("recurso.operacao-nao-permitida", null,
+				LocaleContextHolder.getLocale());
+		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
+		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 
-	
-	@ExceptionHandler({DataIntegrityViolationException.class})
-	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request){
-	String mensagemUsuario = messageSource.getMessage("recurso.operacao-nao-permitida", null, LocaleContextHolder.getLocale());
-	String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
-	List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
-	return handleExceptionInternal(ex, erros , new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-	
-	
 	}
-	
-	
-	@ExceptionHandler({QuantidadeInvalida.class})
+
+	@ExceptionHandler({ QuantidadeInvalida.class })
 	public ResponseEntity<Object> handleQuantidadeInvalida(QuantidadeInvalida ex) {
-		
-	String mensagemUsuario = messageSource.getMessage("quantidade.invalida", null, LocaleContextHolder.getLocale());
-	String mensagemDesenvolvedor = toString();	
-	List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
-	return ResponseEntity.badRequest().body(erros);
+
+		String mensagemUsuario = messageSource.getMessage("quantidade.invalida", null, LocaleContextHolder.getLocale());
+		String mensagemDesenvolvedor = toString();
+		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		return ResponseEntity.badRequest().body(erros);
 	}
 
-
-
-	@ExceptionHandler({FornecedorDiferente.class})
+	@ExceptionHandler({ FornecedorDiferente.class })
 	public ResponseEntity<Object> handleFornecedorDiferente(FornecedorDiferente ex) {
-		
-	String mensagemUsuario = messageSource.getMessage("fornecedor.diferente", null, LocaleContextHolder.getLocale());
-	String mensagemDesenvolvedor = toString();	
-	List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
-	return ResponseEntity.badRequest().body(erros);
+
+		String mensagemUsuario = messageSource.getMessage("fornecedor.diferente", null,
+				LocaleContextHolder.getLocale());
+		String mensagemDesenvolvedor = toString();
+		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		return ResponseEntity.badRequest().body(erros);
 	}
-	
-	
-	
-	
-	
+
 	private List<Erro> criarListaDeErros(BindingResult bindingResult) {
 		List<Erro> erros = new ArrayList<>();
-		
+
 		for (FieldError fieldError : bindingResult.getFieldErrors()) {
-		String mensagemUsuario = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-		String mensagemDesenvolvedor =fieldError.toString();
-		erros.add(new Erro(mensagemUsuario, mensagemDesenvolvedor));
-		
+			String mensagemUsuario = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
+			String mensagemDesenvolvedor = fieldError.toString();
+			erros.add(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+
 		}
-		
+
 		return erros;
-	
+
 	}
-	
+
 	public static class Erro {
 
 		private String mensagemUsuario;
@@ -132,10 +122,6 @@ public class DesafioApiExceptionHandler extends ResponseEntityExceptionHandler {
 		public String getMensagemDesenvolvedor() {
 			return mensagemDesenvolvedor;
 		}
-
-		
-		
-		
 
 	}
 }

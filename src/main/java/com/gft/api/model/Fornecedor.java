@@ -19,17 +19,15 @@ public class Fornecedor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ApiModelProperty(example ="Apple")
+	@ApiModelProperty(example = "Apple")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String nome;
 
-	@ApiModelProperty(example ="12345.0001.6789")
+	@ApiModelProperty(example = "12345.0001.6789")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String cnpj;
-
-	
 
 	public Long getId() {
 		return id;

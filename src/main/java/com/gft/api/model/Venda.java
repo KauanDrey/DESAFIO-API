@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModelProperty;
 
-
 @Entity
 @Table(name = "venda")
 public class Venda {
@@ -30,7 +29,7 @@ public class Venda {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ApiModelProperty(example ="Venda Geral")
+	@ApiModelProperty(example = "Venda Geral")
 	@NotNull
 	private String nome;
 
@@ -49,11 +48,12 @@ public class Venda {
 	@JoinTable(name = "venda_produto", joinColumns = @JoinColumn(name = "id_venda"), inverseJoinColumns = @JoinColumn(name = "id_produto"))
 	private List<Produto> produto;
 
-	@ApiModelProperty(example ="5999.99")
+	@ApiModelProperty(example = "5999.99")
 	@Column(name = "total_compra")
 	private BigDecimal totalCompra;
 
-	@ApiModelProperty(example ="15/12/2020")
+	@NotNull
+	@ApiModelProperty(example = "15/12/2020")
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "data_compra")
 	private LocalDate dataCompra;

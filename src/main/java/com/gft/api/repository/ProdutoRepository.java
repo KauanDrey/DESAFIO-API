@@ -10,8 +10,8 @@ import com.gft.api.repository.geral.ProdutoRepositoryQuery;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Long>, ProdutoRepositoryQuery {
 
-	
 	List<Produto> findAllByOrderByNomeAsc();
+
 	List<Produto> findAllByOrderByNomeDesc();
-	
+
 }

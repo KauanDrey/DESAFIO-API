@@ -41,18 +41,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll().antMatchers("/categorias").permitAll()
 				.antMatchers("/**").authenticated();
 	}
-	
-	
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-	resources.stateless(true);
-	
-	
-	
+		resources.stateless(true);
+
 	}
 
-	
-	
-	
 }

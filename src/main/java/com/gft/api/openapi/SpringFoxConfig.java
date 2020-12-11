@@ -16,35 +16,32 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SpringFoxConfig implements WebMvcConfigurer{
+public class SpringFoxConfig implements WebMvcConfigurer {
 
 	@Bean
 	public Docket apiDocket() {
-		
-		return new Docket (DocumentationType.SWAGGER_2)
-				.select().apis(RequestHandlerSelectors.basePackage("com.gft.api.controller"))
-				.build().apiInfo(apiInfo()).tags(new Tag("Clientes", "Gerencia todos os clientes"))
+
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				.apis(RequestHandlerSelectors.basePackage("com.gft.api.controller")).build().apiInfo(apiInfo())
+				.tags(new Tag("Clientes", "Gerencia todos os clientes"))
 				.tags(new Tag("Fornecedores", "Gerencia todos os fornecedores"))
 				.tags(new Tag("Produtos", "Gerencia todos os produtos"))
 				.tags(new Tag("Vendas", "Gerencia todas as vendas"));
-		
+
 	}
-	
+
 	public ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Desafio API").description("API com funcionalidade de compra").version("1")
 				.contact(new Contact("GFT", "gft.com", "kauan.drey@gft.com")).build();
-		
+
 	}
-	
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		
+
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-		
-		registry.addResourceHandler("/webjars/**")
-		.addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
-	
-	
+
 }

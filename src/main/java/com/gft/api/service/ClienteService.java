@@ -14,7 +14,6 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
-
 	public Cliente atualizar(Long id, Cliente cliente) {
 
 		Cliente clienteSalva = clienteRepository.findById(id).orElse(null);
@@ -23,11 +22,9 @@ public class ClienteService {
 
 		}
 		BeanUtils.copyProperties(cliente, clienteSalva, "id");
-		
+
 		return clienteRepository.save(clienteSalva);
 
 	}
-
-	
 
 }

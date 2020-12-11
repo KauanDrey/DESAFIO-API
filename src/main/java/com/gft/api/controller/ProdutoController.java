@@ -66,7 +66,7 @@ public class ProdutoController {
 
 		}
 		if (produto.getQuantidade() < 1) {
-			
+
 			throw new QuantidadeInvalida();
 		}
 		Produto produtoSalva = produtoRepository.save(produto);

@@ -7,8 +7,6 @@ import com.gft.api.model.Cliente;
 
 public interface ClienteRepositoryQuery {
 
-	
 	public List<Cliente> filtrar(ClienteFilter clienteFilter);
-	
-	
+
 }

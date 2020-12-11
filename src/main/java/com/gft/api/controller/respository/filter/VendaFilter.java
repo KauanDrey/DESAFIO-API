@@ -1,7 +1,7 @@
 package com.gft.api.controller.respository.filter;
 
 public class VendaFilter {
-		
+
 	private String nome;
 
 	public String getNome() {
@@ -11,9 +11,5 @@ public class VendaFilter {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
-
 
 }
-

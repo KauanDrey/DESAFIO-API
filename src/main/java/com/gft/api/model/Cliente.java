@@ -1,7 +1,5 @@
 package com.gft.api.model;
 
-
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -16,8 +14,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModelProperty;
 
-
-
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -26,28 +22,28 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ApiModelProperty(example ="Kauan Drey")
+
+	@ApiModelProperty(example = "Kauan Drey")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String nome;
-	
+
 	@ApiModelProperty(example = "kauan.drey@gft.com")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String email;
-	
+
 	@ApiModelProperty(example = "gft@1234")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String senha;
-	
-	@ApiModelProperty(example ="852.964.274-19")
+
+	@ApiModelProperty(example = "852.964.274-19")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String documento;
-	
-	@ApiModelProperty(example ="01/01/2021")
+
+	@ApiModelProperty(example = "01/01/2021")
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataCadastro;
 
@@ -91,7 +87,6 @@ public class Cliente {
 		this.documento = documento;
 	}
 
-
 	public Date getDataCadastro() {
 		return dataCadastro;
 	}
@@ -126,8 +121,7 @@ public class Cliente {
 	}
 
 	public void setDataCadastro1(Date date) {
-	
+
 	}
-	
-	
+
 }

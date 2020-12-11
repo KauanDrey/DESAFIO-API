@@ -18,43 +18,41 @@ import io.swagger.annotations.ApiModelProperty;
 @Table(name = "produto")
 public class Produto {
 
-	
-	
 	@ApiModelProperty(value = "ID d produto", example = "1")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ApiModelProperty( example ="IPhone 12 pro max")
+	@ApiModelProperty(example = "IPhone 12 pro max")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String nome;
 
-	@ApiModelProperty(example ="55985544")
+	@ApiModelProperty(example = "55985544")
 	private String codigoProduto;
 
-	@ApiModelProperty(example ="7999.99")
+	@ApiModelProperty(example = "7999.99")
 	@NotNull
 	private BigDecimal valor;
 
-	@ApiModelProperty(example ="True")
+	@ApiModelProperty(example = "True")
 	@NotNull
 	private boolean promocao;
 
-	@ApiModelProperty(example ="5999.99")
+	@ApiModelProperty(example = "5999.99")
 	private BigDecimal valorPromo;
 
-	@ApiModelProperty(example ="Celular")
+	@ApiModelProperty(example = "Celular")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String categoria;
 
-	@ApiModelProperty(example ="iphone12promax.jpeg")
+	@ApiModelProperty(example = "iphone12promax.jpeg")
 	@NotNull
 	@Size(min = 3, max = 100)
 	private String imagem;
 
-	@ApiModelProperty(example ="1")
+	@ApiModelProperty(example = "1")
 	@NotNull
 	private Long quantidade;
 
@@ -62,8 +60,7 @@ public class Produto {
 	@ManyToOne
 	@JoinColumn(name = "id_fornecedor")
 	private Fornecedor fornecedor;
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -135,8 +132,7 @@ public class Produto {
 	public void setQuantidade(Long quantidade) {
 		this.quantidade = quantidade;
 	}
-	
-	
+
 	public Fornecedor getFornecedor() {
 		return fornecedor;
 	}
@@ -144,8 +140,6 @@ public class Produto {
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 	}
-	
-
 
 	@Override
 	public int hashCode() {

@@ -22,37 +22,33 @@ public class FornecedorRepositoryImpl implements FornecedorRepositoryQuery {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@Override
 	public List<Fornecedor> filtrar(FornecedorFilter fornecedorFilter) {
-		
-		
+
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Fornecedor> criteria = builder.createQuery(Fornecedor.class);
 		Root<Fornecedor> root = criteria.from(Fornecedor.class);
-		
+
 		Predicate[] predicates = criarRestricoes(fornecedorFilter, builder, root);
 		criteria.where(predicates);
-		
-		TypedQuery<Fornecedor> query = manager.createQuery (criteria);
-		
-		 
+
+		TypedQuery<Fornecedor> query = manager.createQuery(criteria);
+
 		return query.getResultList();
 	}
-	
 
-	private Predicate[] criarRestricoes(FornecedorFilter fornecedorFilter, CriteriaBuilder builder, 
+	private Predicate[] criarRestricoes(FornecedorFilter fornecedorFilter, CriteriaBuilder builder,
 			Root<Fornecedor> root) {
 		List<Predicate> predicates = new ArrayList<>();
-		
+
 		if (!StringUtils.isEmpty(fornecedorFilter.getNome())) {
-			predicates.add(builder.like(
-					builder.lower(root.get("nome")), "%" + fornecedorFilter.getNome().toLowerCase() + "%"));
-			
-			
+			predicates.add(builder.like(builder.lower(root.get("nome")),
+					"%" + fornecedorFilter.getNome().toLowerCase() + "%"));
+
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);
-	
+
 	}
 
 }
