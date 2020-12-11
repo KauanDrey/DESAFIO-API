@@ -8,4 +8,8 @@ CREATE TABLE fornecedor(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-INSERT INTO fornecedor (nome, cnpj) values ('Kauan Drey', '1115454544');
+INSERT INTO fornecedor (nome, cnpj) values ('Apple', '123');
+INSERT INTO fornecedor (nome, cnpj) values ('Microsoft', '456');
+INSERT INTO fornecedor (nome, cnpj) values ('Xiaomi', '789');
+INSERT INTO fornecedor (nome, cnpj) values ('Sansung', '910');
+INSERT INTO fornecedor (nome, cnpj) values ('LG', '1112');

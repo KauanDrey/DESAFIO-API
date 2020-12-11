@@ -8,4 +8,3 @@ CREATE TABLE venda_produto(
  	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO venda_produto (id_venda, id_produto) values ('1', '1');

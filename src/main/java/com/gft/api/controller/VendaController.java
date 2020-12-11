@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gft.api.controller.respository.filter.VendaFilter;
+import com.gft.api.controller.service.exception.FornecedorDiferente;
 import com.gft.api.controller.service.exception.QuantidadeInvalida;
 import com.gft.api.event.RecursoCriadoEvent;
 import com.gft.api.model.Produto;
@@ -78,8 +79,14 @@ public class VendaController {
 
 			produtoRepository.findById(produto.get(i).getId()).get()
 					.setQuantidade(produtoRepository.findById(produto.get(i).getId()).get().getQuantidade() - 1);
-
-			if (produtoRepository.findById(produto.get(i).getId()).get().isPromocao() == true) {
+			
+			if (produtoRepository.findById(produto.get(i).getId()).get().getFornecedor().getId() != venda.getFornecedor().getId()) {
+				
+				throw new FornecedorDiferente();
+				
+			}
+			
+				if (produtoRepository.findById(produto.get(i).getId()).get().isPromocao() == true) {
 
 				somarVenda = somarVenda
 						+ produtoRepository.findById(produto.get(i).getId()).get().getValorPromo().doubleValue();
@@ -96,6 +103,8 @@ public class VendaController {
 				throw new QuantidadeInvalida();
 
 			}
+			
+			
 
 		}
 
@@ -106,6 +115,7 @@ public class VendaController {
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, vendaSalva.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(vendaSalva);
 	}
+	
 
 	@ApiImplicitParam(name = "Authorization", value = "Bearer Token", required = true, allowEmptyValue = false, paramType = "header", example = "Bearer access_token")
 	@ApiOperation("Busca venda pelo ID")

@@ -11,4 +11,3 @@ CREATE TABLE venda(
  	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO venda(nome,id_fornecedor, id_cliente, total_compra, data_compra) values ('GERAL', '1', '1', '8000', '2020-11-03');
