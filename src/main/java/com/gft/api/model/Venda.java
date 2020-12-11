@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -30,6 +31,7 @@ public class Venda {
 	private Long id;
 
 	@ApiModelProperty(example ="Venda Geral")
+	@NotNull
 	private String nome;
 
 	@ApiModelProperty(value = "ID de um fornecedor", example = "1")

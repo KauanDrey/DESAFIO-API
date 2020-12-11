@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gft.api.controller.respository.filter.VendaFilter;
+import com.gft.api.controller.service.exception.QuantidadeInvalida;
 import com.gft.api.event.RecursoCriadoEvent;
 import com.gft.api.model.Produto;
 import com.gft.api.model.Venda;
@@ -66,6 +67,9 @@ public class VendaController {
 			@ApiParam(name = "corpo", value = "Representação de uma nova venda") @Valid @RequestBody Venda venda,
 			HttpServletResponse response) {
 
+		
+		
+		
 		Double somarVenda = 0.0;
 
 		List<Produto> produto = venda.getProduto();
@@ -84,6 +88,12 @@ public class VendaController {
 
 				somarVenda = somarVenda
 						+ produtoRepository.findById(produto.get(i).getId()).get().getValor().doubleValue();
+
+			}
+
+			if (produtoRepository.findById(produto.get(i).getId()).get().getQuantidade() < 0) {
+
+				throw new QuantidadeInvalida();
 
 			}
 

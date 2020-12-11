@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.gft.api.controller.service.exception.QuantidadeInvalida;
+import com.gft.api.exceptionhandler.DesafioApiExceptionHandler.Erro;
+
 @ControllerAdvice
 public class DesafioApiExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -58,6 +61,9 @@ public class DesafioApiExceptionHandler extends ResponseEntityExceptionHandler {
 	return handleExceptionInternal(ex, erros , new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
 	
+
+
+	
 	@ExceptionHandler({DataIntegrityViolationException.class})
 	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request){
 	String mensagemUsuario = messageSource.getMessage("recurso.operacao-nao-permitida", null, LocaleContextHolder.getLocale());
@@ -69,9 +75,18 @@ public class DesafioApiExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 	
 	
-	
-	
-	
+	@ExceptionHandler({QuantidadeInvalida.class})
+	public ResponseEntity<Object> handleQuantidadeInvalida(QuantidadeInvalida ex) {
+		
+	String mensagemUsuario = messageSource.getMessage("quantidade.invalida", null, LocaleContextHolder.getLocale());
+	String mensagemDesenvolvedor = toString();	
+	List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+	return ResponseEntity.badRequest().body(erros);
+	}
+
+
+
+
 	
 	
 	private List<Erro> criarListaDeErros(BindingResult bindingResult) {

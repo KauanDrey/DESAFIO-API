@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gft.api.controller.respository.filter.ProdutoFilter;
+import com.gft.api.controller.service.exception.QuantidadeInvalida;
 import com.gft.api.event.RecursoCriadoEvent;
 import com.gft.api.model.Cliente;
 import com.gft.api.model.Produto;
@@ -63,6 +64,10 @@ public class ProdutoController {
 		if (produto.isPromocao() == false) {
 			produto.setValorPromo(null);
 
+		}
+		if (produto.getQuantidade() < 1) {
+			
+			throw new QuantidadeInvalida();
 		}
 		Produto produtoSalva = produtoRepository.save(produto);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, produtoSalva.getId()));
